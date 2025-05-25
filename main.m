@@ -2,7 +2,6 @@ clear all
 
 J = @(x,u)sum((-5*x(1) + x(2))^2 + 19*u^2);
 
-
 A = [1,1;
      0,2];
 B = [1;
@@ -13,7 +12,7 @@ sterowalnosc = 2==rank(C);
 R = 19;
 F = [0,0;
      0,0];
-Q = [25,-5;
+Q = [25,-5;  
      -5,1];
 N = 20;
 x0 = [10;
@@ -57,4 +56,17 @@ xlabel('Iteracja')
 ylabel('Wartość u w danej iteracji')
 title('u')
 
-
+figure
+hold on
+for i=1:2
+    for j=1:2
+        Kpom = K(i,j,:);
+        Kpom = Kpom(:);
+        plot(Kpom)
+    end
+end
+xlabel('Iteracja')
+ylabel('Wartości elementów K w danej iteracji')
+title('Zmiana elementów macierzy K')
+legend('w:1 k:1', 'w:1 k:2', 'w:2 k:1', 'w:2 k:2');
+hold off
