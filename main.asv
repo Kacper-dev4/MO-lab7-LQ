@@ -18,7 +18,7 @@ N = 20;
 x0 = [10;
       15];
 x = zeros(2,N+1);
-u = zeros(1,N+1);
+u = zeros(1,N);
 x(:,1) = x0;
 
 
@@ -34,10 +34,6 @@ for i=1:N
 
     u(i) = S*x(:,i);
     x(:,i+1) = A*x(:,i) + B*u(i);
-    if i==20
-     S = -(R+B'*K(:,:,i+1)*B)^(-1)*B'*K(:,:,i+1)*A;
-     u(i+1) = S*x(:,i+1);
-    end
 end
 
 J0 = (1/2)*x0'*K(:,:,1)*x0;
@@ -55,7 +51,7 @@ ylabel('Wartość x2 w danej iteracji')
 title('x2')
 
 figure
-plot(0:20,u,'o','LineStyle','--')
+plot(0:19,u,'o','LineStyle','--')
 xlabel('Iteracja')
 ylabel('Wartość u w danej iteracji')
 title('u')
@@ -67,9 +63,9 @@ for i=1:2
         Kpom = K(i,j,:);
         Kpom = Kpom(:);
         if ~(i==1 && j==2)
-            plot(0:20,Kpom,'o','LineStyle','--')
+            plot(Kpom,'o','LineStyle','--')
         else
-            plot(0:20,Kpom,'*','LineStyle',':')    
+            plot(Kpom,'*','LineStyle',':')    
         end
     end
 end
