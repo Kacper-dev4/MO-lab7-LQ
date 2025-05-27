@@ -1,6 +1,5 @@
 clear all
-
-%J = @(x,u)sum((-5*x(1) + x(2))^2 + 19*u^2);
+close all
 
 A = [1,0;
      1,2];
@@ -9,14 +8,14 @@ B = [1;
 
 C = [B A*B];
 sterowalnosc = 2==rank(C);
-R = 12;
+R = 6;
 F = [0,0;
      0,0];
 Q = [16,-12;  
      -12,9];
 N = 20;
-x0 = [10;
-      15];
+x0 = [30;
+      45];
 x = zeros(2,N+1);
 u = zeros(1,N+1);
 x(:,1) = x0;
@@ -67,9 +66,9 @@ for i=1:2
         Kpom = K(i,j,:);
         Kpom = Kpom(:);
         if ~(i==1 && j==2)
-            plot(0:20,Kpom,'o','LineStyle','--')
+            stairs(0:20,Kpom,'o--')
         else
-            plot(0:20,Kpom,'*','LineStyle',':')    
+            stairs(0:20,Kpom,'*:')    
         end
     end
 end
